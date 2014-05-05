@@ -17,7 +17,7 @@ A a simple tool to quickly note and calculate the sum of hour durations from giv
 
 Jetbrains Plugin Repository URL
 -------------------------------
-http://plugins.intellij.net/plugin/index?pr=&pluginId=6149
+http://plugins.jetbrains.com/plugin/7455
 
 
 License
