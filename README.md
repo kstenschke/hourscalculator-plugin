@@ -12,7 +12,9 @@ Screenshot
 
 Description
 -----------
-A a simple tool to quickly note and calculate the sum of hour durations from given times of a day.
+A simple tool to quickly note and calculate the sum of hour durations from given times of a day.
+
+Usage: The Hours Calculator is added to the "Tools" menu of the IDE.
 
 
 Jetbrains Plugin Repository URL
