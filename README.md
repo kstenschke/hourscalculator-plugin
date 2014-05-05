@@ -1,15 +1,17 @@
 Hours Calculator
 ================
 
-Source code of the intellij IDEA "Shifter plugin":http://plugins.intellij.net/plugin/index?pr=&pluginId=6149
+Source code of the intellij IDEA "Hours Calculator plugin"
 This is a plugin for the various intellij IDEs, working in IDEA, PhpStorm, AppCode, etc.
 
+Screenshot
+----------
+![Graublau Icon Theme](https://github.com/kstenschke/hourscalculator-plugin/blob/master/screenshot.png?raw=true)
 
 
 Description
 -----------
 A a simple tool to quickly note and calculate the sum of hour durations from given times of a day.
-
 
 
 License
