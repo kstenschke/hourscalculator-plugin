@@ -19,7 +19,7 @@
   <version>1.0</version>
   <vendor email="info@stenschke.com">Kay Stenschke</vendor>
 
-  <description><![CDATA[Adds a tool to quickly note and calculate the sum of hour durations from given times of a day]]></description>
+  <description><![CDATA[Simple tool to note and calculate the sum of hour durations from given times of day]]></description>
 
   <change-notes><![CDATA[
       1.0.0 Initial release
