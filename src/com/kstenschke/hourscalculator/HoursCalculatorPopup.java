@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PopupHoursCalculator {
+public class HoursCalculatorPopup {
 
     public JPopupMenu popup;
 
@@ -35,7 +35,7 @@ public class PopupHoursCalculator {
     /**
      * Constructor
      */
-    public PopupHoursCalculator(final DialogHoursCalculator dialog, final JTextField textField) {
+    public HoursCalculatorPopup(final DialogHoursCalculator dialog, final JTextField textField) {
         this.popup  = new JPopupMenu();
 
             // Set field to current to

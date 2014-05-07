@@ -16,7 +16,7 @@
 package com.kstenschke.hourscalculator.resources.forms;
 
 import com.kstenschke.hourscalculator.HoursCalculator;
-import com.kstenschke.hourscalculator.PopupHoursCalculator;
+import com.kstenschke.hourscalculator.HoursCalculatorPopup;
 import com.kstenschke.hourscalculator.utils.Preferences;
 
 import javax.swing.*;
@@ -66,16 +66,16 @@ public class DialogHoursCalculator extends JDialog {
     }
 
     private void addPopupMenus() {
-        textFieldStart1.addMouseListener( new PopupHoursCalculator(this, textFieldStart1).getPopupListener() );
-        textFieldEnd1.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd1).getPopupListener() );
-        textFieldStart2.addMouseListener( new PopupHoursCalculator(this, textFieldStart2).getPopupListener() );
-        textFieldEnd2.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd2).getPopupListener() );
-        textFieldStart3.addMouseListener( new PopupHoursCalculator(this, textFieldStart3).getPopupListener() );
-        textFieldEnd3.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd3).getPopupListener() );
-        textFieldStart4.addMouseListener( new PopupHoursCalculator(this, textFieldStart4).getPopupListener() );
-        textFieldEnd4.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd4).getPopupListener() );
-        textFieldStart5.addMouseListener( new PopupHoursCalculator(this, textFieldStart5).getPopupListener() );
-        textFieldEnd5.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd5).getPopupListener() );
+        textFieldStart1.addMouseListener( new HoursCalculatorPopup(this, textFieldStart1).getPopupListener() );
+        textFieldEnd1.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd1).getPopupListener() );
+        textFieldStart2.addMouseListener( new HoursCalculatorPopup(this, textFieldStart2).getPopupListener() );
+        textFieldEnd2.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd2).getPopupListener() );
+        textFieldStart3.addMouseListener( new HoursCalculatorPopup(this, textFieldStart3).getPopupListener() );
+        textFieldEnd3.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd3).getPopupListener() );
+        textFieldStart4.addMouseListener( new HoursCalculatorPopup(this, textFieldStart4).getPopupListener() );
+        textFieldEnd4.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd4).getPopupListener() );
+        textFieldStart5.addMouseListener( new HoursCalculatorPopup(this, textFieldStart5).getPopupListener() );
+        textFieldEnd5.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd5).getPopupListener() );
     }
 
     private void onClose() {
