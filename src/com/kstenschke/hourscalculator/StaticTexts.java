@@ -22,4 +22,13 @@ public class StaticTexts {
     @NonNls
     public static final String TITLE_DIALOG_HOURS_CALCULATOR = "Hours Calculator";
 
+    @NonNls
+    public static final String POPUP_RESET_ALL_HOURS = "Reset all times to 0:00";
+
+    @NonNls
+    public static final String POPUP_SET_CURRENT_HOUR = "Set field time to current time";
+
+    @NonNls
+    public static final String POPUP_RESET_HOUR = "Reset field time to 0:00";
+
 }

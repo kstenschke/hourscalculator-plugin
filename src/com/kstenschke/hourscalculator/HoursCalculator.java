@@ -15,7 +15,7 @@
  */
 package com.kstenschke.hourscalculator;
 
-public class Calculator {
+public class HoursCalculator {
 
     /**
      * @param   timeFrom    Time string formatted like "13:50" or "13"

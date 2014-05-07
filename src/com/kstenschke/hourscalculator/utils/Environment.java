@@ -20,6 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Environment {
 
@@ -52,6 +54,14 @@ public class Environment {
         dialog.setTitle(title);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    public static String getCurrentTime() {
+        Calendar cal = Calendar.getInstance();
+        cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+        return sdf.format(cal.getTime());
     }
 
 }

@@ -15,7 +15,8 @@
  */
 package com.kstenschke.hourscalculator.resources.forms;
 
-import com.kstenschke.hourscalculator.Calculator;
+import com.kstenschke.hourscalculator.HoursCalculator;
+import com.kstenschke.hourscalculator.PopupHoursCalculator;
 import com.kstenschke.hourscalculator.utils.Preferences;
 
 import javax.swing.*;
@@ -48,6 +49,8 @@ public class DialogHoursCalculator extends JDialog {
         setContentPane(contentPane);
         setModal(true);
 
+        addPopupMenus();
+
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -60,6 +63,19 @@ public class DialogHoursCalculator extends JDialog {
                 onClose();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void addPopupMenus() {
+        textFieldStart1.addMouseListener( new PopupHoursCalculator(this, textFieldStart1).getPopupListener() );
+        textFieldEnd1.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd1).getPopupListener() );
+        textFieldStart2.addMouseListener( new PopupHoursCalculator(this, textFieldStart2).getPopupListener() );
+        textFieldEnd2.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd2).getPopupListener() );
+        textFieldStart3.addMouseListener( new PopupHoursCalculator(this, textFieldStart3).getPopupListener() );
+        textFieldEnd3.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd3).getPopupListener() );
+        textFieldStart4.addMouseListener( new PopupHoursCalculator(this, textFieldStart4).getPopupListener() );
+        textFieldEnd4.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd4).getPopupListener() );
+        textFieldStart5.addMouseListener( new PopupHoursCalculator(this, textFieldStart5).getPopupListener() );
+        textFieldEnd5.addMouseListener(   new PopupHoursCalculator(this, textFieldEnd5).getPopupListener() );
     }
 
     private void onClose() {
@@ -84,6 +100,25 @@ public class DialogHoursCalculator extends JDialog {
 
         textFieldStart5.setText(times[8]);
         textFieldEnd5.setText(times[9]);
+
+        calculateHourSums();
+    }
+
+    public void resetAllHours() {
+        textFieldStart1.setText("0:00");
+        textFieldEnd1.setText("0:00");
+
+        textFieldStart2.setText("0:00");
+        textFieldEnd2.setText("0:00");
+
+        textFieldStart3.setText("0:00");
+        textFieldEnd3.setText("0:00");
+
+        textFieldStart4.setText("0:00");
+        textFieldEnd4.setText("0:00");
+
+        textFieldStart5.setText("0:00");
+        textFieldEnd5.setText("0:00");
 
         calculateHourSums();
     }
@@ -162,11 +197,11 @@ public class DialogHoursCalculator extends JDialog {
      * Calculate sum of hours and update all result fields
      */
     private void calculateHourSums() {
-        Integer sumMinutes  = Calculator.getDurationInMinutes(textFieldStart1.getText(), textFieldEnd1.getText());
-                sumMinutes  += Calculator.getDurationInMinutes(textFieldStart2.getText(), textFieldEnd2.getText());
-                sumMinutes  += Calculator.getDurationInMinutes(textFieldStart3.getText(), textFieldEnd3.getText());
-                sumMinutes  += Calculator.getDurationInMinutes(textFieldStart4.getText(), textFieldEnd4.getText());
-                sumMinutes  += Calculator.getDurationInMinutes(textFieldStart5.getText(), textFieldEnd5.getText());
+        Integer sumMinutes  = HoursCalculator.getDurationInMinutes(textFieldStart1.getText(), textFieldEnd1.getText());
+                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart2.getText(), textFieldEnd2.getText());
+                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart3.getText(), textFieldEnd3.getText());
+                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart4.getText(), textFieldEnd4.getText());
+                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart5.getText(), textFieldEnd5.getText());
 
         Double sumFraction  = sumMinutes > 0 ? ( Double.valueOf(sumMinutes) / 60.00 ) : 0;
         String[] fractionParts= sumFraction.toString().split("\\.");

@@ -16,12 +16,13 @@
 <idea-plugin version="2">
   <name>Hours Calculator</name>
   <id>com.kstenschke.hourscalculator</id>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <vendor email="info@stenschke.com">Kay Stenschke</vendor>
 
   <description><![CDATA[Simple tool to note and calculate the sum of hour durations from given times of day]]></description>
 
   <change-notes><![CDATA[
+      1.0.1 Added: Context menu options to re/set hours<br />
       1.0.0 Initial release
       ]]>
   </change-notes>
@@ -45,7 +46,7 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="hourscalculator" class="com.kstenschke.hourscalculator.actions.HourscalculatorAction" text="Hours Calculator"
+      <action id="hourscalculator" class="com.kstenschke.hourscalculator.HoursCalculatorAction" text="Hours Calculator"
               description="Hours Calculator">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
       </action>
