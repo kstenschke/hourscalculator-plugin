@@ -39,8 +39,9 @@ public class HoursCalculatorAction extends AnAction {
         Editor editor = event.getData(PlatformDataKeys.EDITOR);
 
         DialogHoursCalculator dialog    = new DialogHoursCalculator();
-        dialog.initTimesFromPrefs();
         dialog.addListeners();
+        dialog.initTimesFromPrefs();
+
         Environment.setDialogVisible(editor, Preferences.ID_DIALOG_HOURSCALCULATOR, dialog, StaticTexts.TITLE_DIALOG_HOURS_CALCULATOR);
     }
 

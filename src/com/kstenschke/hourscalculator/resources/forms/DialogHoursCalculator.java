@@ -21,6 +21,7 @@ import com.kstenschke.hourscalculator.utils.Preferences;
 import com.kstenschke.hourscalculator.utils.UtilsString;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class DialogHoursCalculator extends JDialog {
@@ -52,8 +53,8 @@ public class DialogHoursCalculator extends JDialog {
      */
     public DialogHoursCalculator() {
         setContentPane(contentPane);
-        setModal(true);
 
+        setAlwaysOnTop(true);
         addPopupMenus();
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -156,7 +157,58 @@ public class DialogHoursCalculator extends JDialog {
     }
 
     public void addListeners() {
-        FocusListener focusListener = new FocusListener() {
+            // Add component listener to dialog - store position when changed
+        this.addComponentListener( getComponentListener() );
+
+            // Add focus listener to all fields - sanitize value, recalculate sum
+        FocusListener focusListener = getFocusListener();
+
+        textFieldStart1.addFocusListener(focusListener);
+        textFieldStart2.addFocusListener(focusListener);
+        textFieldStart3.addFocusListener(focusListener);
+        textFieldStart4.addFocusListener(focusListener);
+        textFieldStart5.addFocusListener(focusListener);
+
+        textFieldEnd1.addFocusListener(focusListener);
+        textFieldEnd2.addFocusListener(focusListener);
+        textFieldEnd3.addFocusListener(focusListener);
+        textFieldEnd4.addFocusListener(focusListener);
+        textFieldEnd5.addFocusListener(focusListener);
+    }
+
+    /**
+     * @return  ComponentListener
+     */
+    private ComponentListener getComponentListener() {
+        return new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                Component component = e.getComponent();
+                Preferences.saveDialogPosition(Preferences.ID_DIALOG_HOURSCALCULATOR, component.getX(), component.getY());
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
+            }
+        };
+    }
+
+    /**
+     * @return  FocusListener
+     */
+    private FocusListener getFocusListener() {
+        return new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 JTextField textField    = (JTextField) e.getComponent();
@@ -188,18 +240,6 @@ public class DialogHoursCalculator extends JDialog {
                 calculateHourSums();
             }
         };
-
-        textFieldStart1.addFocusListener(focusListener);
-        textFieldStart2.addFocusListener(focusListener);
-        textFieldStart3.addFocusListener(focusListener);
-        textFieldStart4.addFocusListener(focusListener);
-        textFieldStart5.addFocusListener(focusListener);
-
-        textFieldEnd1.addFocusListener(focusListener);
-        textFieldEnd2.addFocusListener(focusListener);
-        textFieldEnd3.addFocusListener(focusListener);
-        textFieldEnd4.addFocusListener(focusListener);
-        textFieldEnd5.addFocusListener(focusListener);
     }
 
     /**

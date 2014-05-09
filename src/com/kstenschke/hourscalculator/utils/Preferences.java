@@ -81,7 +81,7 @@ public class Preferences {
     /**
      * @param   showSums   Show sums (min, fraction, duration) as comma-separated string of 0 or 1s
      */
-    public static void saveShowSums(String showSums) {
+    public static void saveShownSums(String showSums) {
         PropertiesComponent.getInstance().setValue(PROP_SHOW_SUMS, showSums);
     }
 
@@ -97,11 +97,11 @@ public class Preferences {
      * @return  Boolean     is set now?
      */
     private static Boolean toggleShowSum(Integer index) {
-        String[] show   = getShownSums();
-        show[index] = show[index].equals("1") ? "0" : "1";
-        saveShowSums( StringUtils.join(show, ",") );
+        String[] shown   = getShownSums();
+        shown[index] = shown[index].equals("1") ? "0" : "1";
+        saveShownSums(StringUtils.join(shown, ","));
 
-        return show[index].equals("1");
+        return shown[index].equals("1");
     }
 
     public static Boolean toggleShowSumMinutes() {

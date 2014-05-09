@@ -22,6 +22,12 @@ Jetbrains Plugin Repository URL
 http://plugins.jetbrains.com/plugin/7455
 
 
+Credits
+-------
+The icons used in this plugin are from the Iconsweets iconset - http://iconsweets.com/
+which is licensed under the Attribution 3.0 Unported license - http://creativecommons.org/licenses/by/3.0/)
+
+
 License
 -------
 Copyright 2014 Kay Stenschke

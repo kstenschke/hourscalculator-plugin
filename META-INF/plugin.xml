@@ -19,10 +19,17 @@
   <version>1.0.2</version>
   <vendor email="info@stenschke.com">Kay Stenschke</vendor>
 
-  <description><![CDATA[Simple tool to note and calculate the sum of hour durations from given times of day]]></description>
+  <description><![CDATA[
+  Simple tool to note and calculate the sum of hour durations from given times of day
+
+  Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+  The icons used in this plugin are from the Iconsweets iconset (http://iconsweets.com/),
+  which is licensed under the Attribution 3.0 Unported license (http://creativecommons.org/licenses/by/3.0/)
+  ]]></description>
 
   <change-notes><![CDATA[
-      1.0.2 Added: Times are sanitized for valid input, Sums can be hidden<br />
+      1.0.2 Added: Times are sanitized for valid input, sums can be hidden, window re/stores position<br />
       1.0.1 Added: Context menu options to re/set hours<br />
       1.0.0 Initial release
       ]]>

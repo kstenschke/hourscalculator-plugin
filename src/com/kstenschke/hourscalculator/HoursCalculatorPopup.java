@@ -39,6 +39,8 @@ public class HoursCalculatorPopup {
     public JMenuItem menuItemShowSumFraction;
     public JMenuItem menuItemShowSumDuration;
 
+    private ImageIcon iconCheck = null;
+
     /**
      * Constructor
      */
@@ -46,7 +48,7 @@ public class HoursCalculatorPopup {
         this.dialog = dialog;
         this.popup  = new JPopupMenu();
 
-            // Set field to current to
+            // Set field to current time
         this.menuItemHourToCurrentTime = new JMenuItem(StaticTexts.POPUP_SET_CURRENT_HOUR);
         this.menuItemHourToCurrentTime.addActionListener(new ActionListener() {
             @Override
@@ -54,6 +56,13 @@ public class HoursCalculatorPopup {
                 setFieldText(textField, Environment.getCurrentTime());
             }
         });
+        try {
+            Image imageClock = ImageIO.read( getClass().getResource("resources/images/clock.png") );
+            ImageIcon iconClock   = new ImageIcon(imageClock);
+            this.menuItemHourToCurrentTime.setIcon(iconClock);
+        } catch(Exception exception) {
+            exception.printStackTrace();
+        }
         this.popup.add(this.menuItemHourToCurrentTime);
 
             // Set field to 0:00
@@ -68,7 +77,7 @@ public class HoursCalculatorPopup {
 
         this.popup.addSeparator();
 
-            // Set all fields to 0:00
+            // Reset all fields to 0:00
         this.menuItemResetAllHours = new JMenuItem(StaticTexts.POPUP_RESET_ALL_HOURS);
         this.menuItemResetAllHours.addActionListener(new ActionListener() {
             @Override
@@ -76,12 +85,18 @@ public class HoursCalculatorPopup {
                 dialog.resetAllHours();
             }
         });
+        try {
+            Image imageReset = ImageIO.read( getClass().getResource("resources/images/arrow-reset.png") );
+            ImageIcon iconReset   = new ImageIcon(imageReset);
+            this.menuItemResetAllHours.setIcon(iconReset);
+        } catch(Exception exception) {
+            exception.printStackTrace();
+        }
         this.popup.add(this.menuItemResetAllHours);
 
         this.popup.addSeparator();
 
         String[] showSums   = Preferences.getShownSums();
-        ImageIcon iconCheck = null;
         try {
             Image image = ImageIO.read( getClass().getResource("resources/images/check.png") );
             iconCheck   = new ImageIcon(image);
@@ -94,7 +109,7 @@ public class HoursCalculatorPopup {
         this.menuItemShowSumMinutes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Boolean isShown = Preferences.toggleShowSumMinutes();
+                Preferences.toggleShowSumMinutes();
                 updateShownChecks();
             }
         });
@@ -106,7 +121,7 @@ public class HoursCalculatorPopup {
         this.menuItemShowSumFraction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Boolean isShown = Preferences.toggleShowSumFraction();
+                Preferences.toggleShowSumFraction();
                 updateShownChecks();
             }
         });
@@ -129,9 +144,17 @@ public class HoursCalculatorPopup {
     public void updateShownChecks() {
         String[] shownSums   = Preferences.getShownSums();
 
-        this.dialog.panelSumMinutes.setVisible( shownSums[0].equals("1") );
-        this.dialog.panelSumFraction.setVisible( shownSums[1].equals("1") );
-        this.dialog.panelSumDuration.setVisible( shownSums[2].equals("1") );
+        Boolean showMinutes = shownSums[0].equals("1");
+        Boolean showFraction= shownSums[1].equals("1");
+        Boolean showDuration= shownSums[2].equals("1");
+
+        this.dialog.panelSumMinutes.setVisible(  showMinutes );
+        this.dialog.panelSumFraction.setVisible( showFraction );
+        this.dialog.panelSumDuration.setVisible( showDuration );
+
+        this.menuItemShowSumMinutes.setIcon( showMinutes ? iconCheck : null );
+        this.menuItemShowSumFraction.setIcon( showFraction ? iconCheck : null );
+        this.menuItemShowSumDuration.setIcon( showDuration ? iconCheck : null );
     }
 
     /**
@@ -179,8 +202,9 @@ public class HoursCalculatorPopup {
          * @param   e
          */
         private void maybeShowPopup(MouseEvent e) {
+            updateShownChecks();
+
             if (e.isPopupTrigger() ) {
-                updateShownChecks();
                 popup.show(e.getComponent(), e.getX(), e.getY());
             }
         }
