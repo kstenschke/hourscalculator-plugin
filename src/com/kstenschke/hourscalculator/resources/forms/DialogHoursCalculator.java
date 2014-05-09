@@ -17,7 +17,7 @@ package com.kstenschke.hourscalculator.resources.forms;
 
 import com.kstenschke.hourscalculator.HoursCalculator;
 import com.kstenschke.hourscalculator.HoursCalculatorPopup;
-import com.kstenschke.hourscalculator.utils.Preferences;
+import com.kstenschke.hourscalculator.utils.UtilsPreferences;
 import com.kstenschke.hourscalculator.utils.UtilsString;
 
 import javax.swing.*;
@@ -48,12 +48,25 @@ public class DialogHoursCalculator extends JDialog {
     public JPanel panelSumFraction;
     public JPanel panelSumDuration;
 
+    public JTextField textFieldSum1;
+    public JTextField textFieldSum2;
+    public JTextField textFieldSum3;
+    public JTextField textFieldSum4;
+    public JTextField textFieldSum5;
+
+    public JLabel eq1;
+    public JLabel eq2;
+    public JLabel eq3;
+    public JLabel eq4;
+    public JLabel eq5;
+
     /**
      * Constructor
      */
     public DialogHoursCalculator() {
         setContentPane(contentPane);
 
+        setResizable(false);
         setAlwaysOnTop(true);
         addPopupMenus();
 
@@ -90,7 +103,7 @@ public class DialogHoursCalculator extends JDialog {
     }
 
     public void initTimesFromPrefs() {
-        String[] times  = Preferences.getStartEndTimes();
+        String[] times  = UtilsPreferences.getStartEndTimes();
 
         textFieldStart1.setText(times[0]);
         textFieldEnd1.setText(times[1]);
@@ -130,18 +143,18 @@ public class DialogHoursCalculator extends JDialog {
     }
 
     private void storeTimesPref() {
-        String timesCsv  =       getTimeVal(textFieldStart1.getText());
-        timesCsv        += "," + getTimeVal( textFieldEnd1.getText() );
+        String timesCsv  =       getTimeVal( textFieldStart1.getText());
+        timesCsv        += "," + getTimeVal(   textFieldEnd1.getText() );
         timesCsv        += "," + getTimeVal( textFieldStart2.getText() );
-        timesCsv        += "," + getTimeVal( textFieldEnd2.getText() );
+        timesCsv        += "," + getTimeVal(   textFieldEnd2.getText() );
         timesCsv        += "," + getTimeVal( textFieldStart3.getText() );
-        timesCsv        += "," + getTimeVal( textFieldEnd3.getText() );
+        timesCsv        += "," + getTimeVal(   textFieldEnd3.getText() );
         timesCsv        += "," + getTimeVal( textFieldStart4.getText() );
-        timesCsv        += "," + getTimeVal( textFieldEnd4.getText() );
+        timesCsv        += "," + getTimeVal(   textFieldEnd4.getText() );
         timesCsv        += "," + getTimeVal( textFieldStart5.getText() );
-        timesCsv        += "," + getTimeVal( textFieldEnd5.getText() );
+        timesCsv        += "," + getTimeVal(   textFieldEnd5.getText() );
 
-        Preferences.saveStartEndTimes(timesCsv);
+        UtilsPreferences.saveStartEndTimes(timesCsv);
     }
 
     /**
@@ -189,7 +202,7 @@ public class DialogHoursCalculator extends JDialog {
             @Override
             public void componentMoved(ComponentEvent e) {
                 Component component = e.getComponent();
-                Preferences.saveDialogPosition(Preferences.ID_DIALOG_HOURSCALCULATOR, component.getX(), component.getY());
+                UtilsPreferences.saveDialogPosition(UtilsPreferences.ID_DIALOG_HOURSCALCULATOR, component.getX(), component.getY());
             }
 
             @Override
@@ -246,11 +259,19 @@ public class DialogHoursCalculator extends JDialog {
      * Calculate sum of hours and update all result fields
      */
     public void calculateHourSums() {
-        Integer sumMinutes  = HoursCalculator.getDurationInMinutes(textFieldStart1.getText(), textFieldEnd1.getText());
-                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart2.getText(), textFieldEnd2.getText());
-                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart3.getText(), textFieldEnd3.getText());
-                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart4.getText(), textFieldEnd4.getText());
-                sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart5.getText(), textFieldEnd5.getText());
+        Integer sumRow1  = getDurationSumMinutesPositiveFromTimeTextFields(textFieldStart1, textFieldEnd1);
+        Integer sumRow2  = getDurationSumMinutesPositiveFromTimeTextFields(textFieldStart2, textFieldEnd2);
+        Integer sumRow3  = getDurationSumMinutesPositiveFromTimeTextFields(textFieldStart3, textFieldEnd3);
+        Integer sumRow4  = getDurationSumMinutesPositiveFromTimeTextFields(textFieldStart4, textFieldEnd4);
+        Integer sumRow5  = getDurationSumMinutesPositiveFromTimeTextFields(textFieldStart5, textFieldEnd5);
+
+        textFieldSum1.setText( sumRow1.toString() );
+        textFieldSum2.setText( sumRow2.toString() );
+        textFieldSum3.setText( sumRow3.toString() );
+        textFieldSum4.setText( sumRow4.toString() );
+        textFieldSum5.setText( sumRow5.toString() );
+
+        Integer sumMinutes  = sumRow1 + sumRow2 + sumRow3 + sumRow4 + sumRow5;
 
         Double sumFraction  = sumMinutes > 0 ? ( Double.valueOf(sumMinutes) / 60.00 ) : 0;
         String[] fractionParts= sumFraction.toString().split("\\.");
@@ -262,8 +283,24 @@ public class DialogHoursCalculator extends JDialog {
         }
 
         textFieldSumMinutes.setText( String.valueOf(sumMinutes) );
-        textFieldSumFraction.setText( String.valueOf(  String.format("%.2g%n", sumFraction) ) );
+        textFieldSumFraction.setText( String.valueOf(  String.format("%.2f", sumFraction) ) );
         textFieldSumHours.setText( String.valueOf(sumHours) );
+    }
+
+    /**
+     * @param   field1
+     * @param   field2
+     * @return  Integer
+     */
+    private Integer getDurationSumMinutesPositiveFromTimeTextFields(JTextField field1, JTextField field2) {
+        Integer sum     = HoursCalculator.getDurationInMinutes(field1.getText(), field2.getText());
+
+        if( sum < 0 ) {
+            field2.setText( field1.getText() );
+            sum     = HoursCalculator.getDurationInMinutes(field1.getText(), field2.getText());
+        }
+
+        return sum;
     }
 
     /**

@@ -29,9 +29,19 @@
   ]]></description>
 
   <change-notes><![CDATA[
-      1.0.2 Added: Times are sanitized for valid input, sums can be hidden, window re/stores position<br />
-      1.0.1 Added: Context menu options to re/set hours<br />
-      1.0.0 Initial release
+  <ul>
+      <li>1.0.2
+        <ul>
+            <li>Times are sanitized for valid input, negative times are prevented</li>
+            <li>Added duration per row (in minutes)</li>
+            <li>Sums can be hidden, hiding sum in minutes hides also duration per row</li>
+            <li>Window re/stores position, is now always-on-top and non-modal</li>
+            <li>Improved UI, added icons</li>
+        </ul>
+      </li>
+      <li>1.0.1 Added: Context menu options to re/set hours</li>
+      <li>1.0.0 Initial release</li>
+  </ul>
       ]]>
   </change-notes>
 

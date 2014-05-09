@@ -19,7 +19,7 @@ import com.intellij.ide.util.PropertiesComponent;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NonNls;
 
-public class Preferences {
+public class UtilsPreferences {
 
     @NonNls
     public static final String ID_DIALOG_HOURSCALCULATOR = "PluginHoursCalculator.DialogHoursCalculator";

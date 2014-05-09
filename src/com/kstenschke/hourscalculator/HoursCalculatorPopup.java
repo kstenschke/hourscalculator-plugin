@@ -16,8 +16,8 @@
 package com.kstenschke.hourscalculator;
 
 import com.kstenschke.hourscalculator.resources.forms.DialogHoursCalculator;
-import com.kstenschke.hourscalculator.utils.Environment;
-import com.kstenschke.hourscalculator.utils.Preferences;
+import com.kstenschke.hourscalculator.utils.UtilsEnvironment;
+import com.kstenschke.hourscalculator.utils.UtilsPreferences;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -53,7 +53,7 @@ public class HoursCalculatorPopup {
         this.menuItemHourToCurrentTime.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setFieldText(textField, Environment.getCurrentTime());
+                setFieldText(textField, UtilsEnvironment.getCurrentTime());
                 dialog.calculateHourSums();
             }
         });
@@ -97,7 +97,7 @@ public class HoursCalculatorPopup {
 
         this.popup.addSeparator();
 
-        String[] showSums   = Preferences.getShownSums();
+        String[] showSums   = UtilsPreferences.getShownSums();
         try {
             Image image = ImageIO.read( getClass().getResource("resources/images/check.png") );
             iconCheck   = new ImageIcon(image);
@@ -110,7 +110,7 @@ public class HoursCalculatorPopup {
         this.menuItemShowSumMinutes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Preferences.toggleShowSumMinutes();
+                UtilsPreferences.toggleShowSumMinutes();
                 updateShownChecks();
             }
         });
@@ -122,7 +122,7 @@ public class HoursCalculatorPopup {
         this.menuItemShowSumFraction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Preferences.toggleShowSumFraction();
+                UtilsPreferences.toggleShowSumFraction();
                 updateShownChecks();
             }
         });
@@ -134,7 +134,7 @@ public class HoursCalculatorPopup {
         this.menuItemShowSumDuration.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Preferences.toggleShowSumDuration();
+                UtilsPreferences.toggleShowSumDuration();
                 updateShownChecks();
             }
         });
@@ -143,13 +143,24 @@ public class HoursCalculatorPopup {
     }
 
     public void updateShownChecks() {
-        String[] shownSums   = Preferences.getShownSums();
+        String[] shownSums   = UtilsPreferences.getShownSums();
 
         Boolean showMinutes = shownSums[0].equals("1");
         Boolean showFraction= shownSums[1].equals("1");
         Boolean showDuration= shownSums[2].equals("1");
 
         this.dialog.panelSumMinutes.setVisible(  showMinutes );
+        this.dialog.eq1.setVisible( showMinutes );
+        this.dialog.eq2.setVisible( showMinutes );
+        this.dialog.eq3.setVisible( showMinutes );
+        this.dialog.eq4.setVisible( showMinutes );
+        this.dialog.eq5.setVisible( showMinutes );
+        this.dialog.textFieldSum1.setVisible( showMinutes );
+        this.dialog.textFieldSum2.setVisible( showMinutes );
+        this.dialog.textFieldSum3.setVisible( showMinutes );
+        this.dialog.textFieldSum4.setVisible( showMinutes );
+        this.dialog.textFieldSum5.setVisible( showMinutes );
+
         this.dialog.panelSumFraction.setVisible( showFraction );
         this.dialog.panelSumDuration.setVisible( showDuration );
 

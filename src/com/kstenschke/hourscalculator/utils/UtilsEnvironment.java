@@ -23,7 +23,7 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Environment {
+public class UtilsEnvironment {
 
     /**
      * @param editor
@@ -38,7 +38,7 @@ public class Environment {
             Point caretLocation = editor.visualPositionToXY(editor.getCaretModel().getVisualPosition());
             SwingUtilities.convertPointToScreen(caretLocation, editor.getComponent());
 
-            String[] position = Preferences.getDialogPosition(idDialog).split("x");
+            String[] position = UtilsPreferences.getDialogPosition(idDialog).split("x");
             if( ! (position[0].equals("0") && position[1].equals("0")) ) {
                 location = new Point( Integer.parseInt(position[0]), Integer.parseInt(position[1]) );
             }

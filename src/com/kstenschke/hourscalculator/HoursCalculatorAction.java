@@ -19,11 +19,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.kstenschke.hourscalculator.StaticTexts;
 import com.kstenschke.hourscalculator.resources.forms.DialogHoursCalculator;
-import com.kstenschke.hourscalculator.utils.Environment;
-import com.kstenschke.hourscalculator.utils.Preferences;
+import com.kstenschke.hourscalculator.utils.UtilsEnvironment;
+import com.kstenschke.hourscalculator.utils.UtilsPreferences;
 
 /**
  * Open hours calculator
@@ -42,7 +40,7 @@ public class HoursCalculatorAction extends AnAction {
         dialog.addListeners();
         dialog.initTimesFromPrefs();
 
-        Environment.setDialogVisible(editor, Preferences.ID_DIALOG_HOURSCALCULATOR, dialog, StaticTexts.TITLE_DIALOG_HOURS_CALCULATOR);
+        UtilsEnvironment.setDialogVisible(editor, UtilsPreferences.ID_DIALOG_HOURSCALCULATOR, dialog, StaticTexts.TITLE_DIALOG_HOURS_CALCULATOR);
     }
 
 }
