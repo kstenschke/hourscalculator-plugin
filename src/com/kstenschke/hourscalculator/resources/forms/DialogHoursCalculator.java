@@ -245,7 +245,7 @@ public class DialogHoursCalculator extends JDialog {
     /**
      * Calculate sum of hours and update all result fields
      */
-    private void calculateHourSums() {
+    public void calculateHourSums() {
         Integer sumMinutes  = HoursCalculator.getDurationInMinutes(textFieldStart1.getText(), textFieldEnd1.getText());
                 sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart2.getText(), textFieldEnd2.getText());
                 sumMinutes  += HoursCalculator.getDurationInMinutes(textFieldStart3.getText(), textFieldEnd3.getText());

@@ -2,7 +2,8 @@ Hours Calculator
 ================
 
 Source code of the intellij IDEA "Hours Calculator plugin"
-This is a plugin for the various intellij IDEs, working in IDEA, PhpStorm, AppCode, etc.
+This is a plugin for the various intellij IDEs, working in
+Intellij IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode and Android Studio.
 
 
 Screenshot

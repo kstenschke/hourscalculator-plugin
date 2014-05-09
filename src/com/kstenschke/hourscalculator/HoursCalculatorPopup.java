@@ -54,6 +54,7 @@ public class HoursCalculatorPopup {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setFieldText(textField, Environment.getCurrentTime());
+                dialog.calculateHourSums();
             }
         });
         try {
