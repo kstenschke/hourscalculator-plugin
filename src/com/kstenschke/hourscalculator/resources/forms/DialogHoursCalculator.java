@@ -18,6 +18,7 @@ package com.kstenschke.hourscalculator.resources.forms;
 import com.kstenschke.hourscalculator.HoursCalculator;
 import com.kstenschke.hourscalculator.HoursCalculatorPopup;
 import com.kstenschke.hourscalculator.utils.Preferences;
+import com.kstenschke.hourscalculator.utils.UtilsString;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -41,6 +42,10 @@ public class DialogHoursCalculator extends JDialog {
     private JTextField textFieldEnd3;
     private JTextField textFieldEnd4;
     private JTextField textFieldEnd5;
+
+    public JPanel panelSumMinutes;
+    public JPanel panelSumFraction;
+    public JPanel panelSumDuration;
 
     /**
      * Constructor
@@ -66,16 +71,16 @@ public class DialogHoursCalculator extends JDialog {
     }
 
     private void addPopupMenus() {
-        textFieldStart1.addMouseListener( new HoursCalculatorPopup(this, textFieldStart1).getPopupListener() );
-        textFieldEnd1.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd1).getPopupListener() );
-        textFieldStart2.addMouseListener( new HoursCalculatorPopup(this, textFieldStart2).getPopupListener() );
-        textFieldEnd2.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd2).getPopupListener() );
-        textFieldStart3.addMouseListener( new HoursCalculatorPopup(this, textFieldStart3).getPopupListener() );
-        textFieldEnd3.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd3).getPopupListener() );
-        textFieldStart4.addMouseListener( new HoursCalculatorPopup(this, textFieldStart4).getPopupListener() );
-        textFieldEnd4.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd4).getPopupListener() );
-        textFieldStart5.addMouseListener( new HoursCalculatorPopup(this, textFieldStart5).getPopupListener() );
-        textFieldEnd5.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd5).getPopupListener() );
+        textFieldStart1.addMouseListener( new HoursCalculatorPopup(this, textFieldStart1).getPopupListener(this) );
+        textFieldEnd1.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd1).getPopupListener(this) );
+        textFieldStart2.addMouseListener( new HoursCalculatorPopup(this, textFieldStart2).getPopupListener(this) );
+        textFieldEnd2.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd2).getPopupListener(this) );
+        textFieldStart3.addMouseListener( new HoursCalculatorPopup(this, textFieldStart3).getPopupListener(this) );
+        textFieldEnd3.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd3).getPopupListener(this) );
+        textFieldStart4.addMouseListener( new HoursCalculatorPopup(this, textFieldStart4).getPopupListener(this) );
+        textFieldEnd4.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd4).getPopupListener(this) );
+        textFieldStart5.addMouseListener( new HoursCalculatorPopup(this, textFieldStart5).getPopupListener(this) );
+        textFieldEnd5.addMouseListener(   new HoursCalculatorPopup(this, textFieldEnd5).getPopupListener(this) );
     }
 
     private void onClose() {
@@ -124,7 +129,7 @@ public class DialogHoursCalculator extends JDialog {
     }
 
     private void storeTimesPref() {
-        String timesCsv  =       getTimeVal( textFieldStart1.getText() );
+        String timesCsv  =       getTimeVal(textFieldStart1.getText());
         timesCsv        += "," + getTimeVal( textFieldEnd1.getText() );
         timesCsv        += "," + getTimeVal( textFieldStart2.getText() );
         timesCsv        += "," + getTimeVal( textFieldEnd2.getText() );
@@ -135,15 +140,19 @@ public class DialogHoursCalculator extends JDialog {
         timesCsv        += "," + getTimeVal( textFieldStart5.getText() );
         timesCsv        += "," + getTimeVal( textFieldEnd5.getText() );
 
-        Preferences.saveStartEndTimes( timesCsv );
+        Preferences.saveStartEndTimes(timesCsv);
     }
 
-    private String getTimeVal(String val) {
-        if( val.isEmpty() ) {
-            val = "0:00";
+    /**
+     * @param   value
+     * @return  Value
+     */
+    private String getTimeVal(String value) {
+        if( value.isEmpty() ) {
+            value = "0:00";
         }
 
-        return val;
+        return value;
     }
 
     public void addListeners() {
@@ -162,7 +171,7 @@ public class DialogHoursCalculator extends JDialog {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextField textField    = (JTextField) e.getComponent();
-                String text = textField.getText().trim();
+                String text = UtilsString.sanitizeTimeString(textField.getText());
 
                 if( text.endsWith(":")) {
                     text += "00";
@@ -217,6 +226,9 @@ public class DialogHoursCalculator extends JDialog {
         textFieldSumHours.setText( String.valueOf(sumHours) );
     }
 
+    /**
+     * @param   args
+     */
     public static void main(String[] args) {
         DialogHoursCalculator dialog = new DialogHoursCalculator();
         dialog.pack();

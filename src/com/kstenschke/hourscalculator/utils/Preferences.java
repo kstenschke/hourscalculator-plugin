@@ -16,6 +16,7 @@
 package com.kstenschke.hourscalculator.utils;
 
 import com.intellij.ide.util.PropertiesComponent;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NonNls;
 
 public class Preferences {
@@ -25,6 +26,9 @@ public class Preferences {
 
     @NonNls
     public static final String PROP_START_END_TIMES = "PluginHoursCalculator.StartEndTimes";
+
+    @NonNls
+    public static final String PROP_SHOW_SUMS = "PluginHoursCalculator.ShowSums";
 
     /**
      * @param propertyName Name of the preference property
@@ -72,6 +76,44 @@ public class Preferences {
      */
     public static String[] getStartEndTimes() {
         return getProperty(PROP_START_END_TIMES, "0:00,0:00,0:00,0:00,0:00,0:00,0:00,0:00,0:00,0:00", true).split(",");
+    }
+
+    /**
+     * @param   showSums   Show sums (min, fraction, duration) as comma-separated string of 0 or 1s
+     */
+    public static void saveShowSums(String showSums) {
+        PropertiesComponent.getInstance().setValue(PROP_SHOW_SUMS, showSums);
+    }
+
+    /**
+     * @return  String[]
+     */
+    public static String[] getShownSums() {
+        return getProperty(PROP_SHOW_SUMS, "1,1,1", true).split(",");
+    }
+
+    /**
+     * @param   index       0 = minutes, 1 = fraction, 2 = duration
+     * @return  Boolean     is set now?
+     */
+    private static Boolean toggleShowSum(Integer index) {
+        String[] show   = getShownSums();
+        show[index] = show[index].equals("1") ? "0" : "1";
+        saveShowSums( StringUtils.join(show, ",") );
+
+        return show[index].equals("1");
+    }
+
+    public static Boolean toggleShowSumMinutes() {
+        return toggleShowSum(0);
+    }
+
+    public static Boolean toggleShowSumFraction() {
+        return toggleShowSum(1);
+    }
+
+    public static Boolean toggleShowSumDuration() {
+        return toggleShowSum(2);
     }
 
 }

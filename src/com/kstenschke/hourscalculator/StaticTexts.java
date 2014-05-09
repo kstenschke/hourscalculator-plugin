@@ -31,4 +31,13 @@ public class StaticTexts {
     @NonNls
     public static final String POPUP_RESET_HOUR = "Reset field time to 0:00";
 
+    @NonNls
+    public static final String POPUP_SHOW_SUM_MINUTES = "Show sum in minutes (ex: 90)";
+
+    @NonNls
+    public static final String POPUP_SHOW_SUM_FRACTION = "Show sum as hours fraction (ex: 1.5)";
+
+    @NonNls
+    public static final String POPUP_SHOW_SUM_DURATION = "Show sum as hours duration (ex: 1:30)";
+
 }

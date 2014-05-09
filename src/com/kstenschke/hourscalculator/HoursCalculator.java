@@ -15,6 +15,8 @@
  */
 package com.kstenschke.hourscalculator;
 
+import com.kstenschke.hourscalculator.utils.UtilsString;
+
 public class HoursCalculator {
 
     /**
@@ -46,8 +48,12 @@ public class HoursCalculator {
      * @param   timeStr
      */
     private static Integer extractHourFromTime(String timeStr) {
+        timeStr = UtilsString.sanitizeTimeString(timeStr);
+
         if( timeStr.contains(":")) {
-            return Integer.parseInt( timeStr.split(":")[0] );
+            String hourStr  = timeStr.split(":")[0];
+
+            return !hourStr.equals("") ? Integer.parseInt( hourStr ) : 0;
         }
 
         return Integer.parseInt( timeStr );
