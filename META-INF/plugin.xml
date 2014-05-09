@@ -55,7 +55,7 @@
   <actions>
     <!-- Add your actions here -->
       <action id="hourscalculator" class="com.kstenschke.hourscalculator.HoursCalculatorAction" text="Hours Calculator"
-              description="Hours Calculator">
+              description="Hours Calculator" icon="resources/images/clock.png">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
       </action>
   </actions>
