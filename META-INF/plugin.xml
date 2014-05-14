@@ -30,13 +30,7 @@
 
   <change-notes><![CDATA[
   <ul>
-      <li>1.0.3
-        <ul>
-            <li>Made duration minutes always formatted with two digits</li>
-            <li>Filled clock icon's inside for better hover contrast</li>
-            <li>Made start time fields width static</li>
-        </ul>
-      </li>
+      <li>1.0.3 Duration minutes are now formatted with two digits, UI improvements</li>
       <li>1.0.2
         <ul>
             <li>Times are sanitized for valid input, negative times are prevented</li>
