@@ -277,7 +277,8 @@ public class DialogHoursCalculator extends JDialog {
         String[] fractionParts= sumFraction.toString().split("\\.");
 
         Double fractionMinutes= ( 60 * ( Double.valueOf("0." + fractionParts[1]) ) );
-        String sumHours       = fractionParts[0] + ":" + String.valueOf(fractionMinutes.intValue());
+        String fractionMinStr = String.valueOf(fractionMinutes.intValue());
+        String sumHours       = fractionParts[0] + ":" + (fractionMinStr.length() == 1 ? "0" : "") + fractionMinStr;
         if( sumHours.startsWith(":") ) {
             sumHours    = "0" + sumHours;
         }

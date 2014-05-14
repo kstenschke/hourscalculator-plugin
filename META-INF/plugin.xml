@@ -16,7 +16,7 @@
 <idea-plugin version="2">
   <name>Hours Calculator</name>
   <id>com.kstenschke.hourscalculator</id>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <vendor email="info@stenschke.com">Kay Stenschke</vendor>
 
   <description><![CDATA[
@@ -30,6 +30,13 @@
 
   <change-notes><![CDATA[
   <ul>
+      <li>1.0.3
+        <ul>
+            <li>Made duration minutes always formatted with two digits</li>
+            <li>Filled clock icon's inside for better hover contrast</li>
+            <li>Made start time fields width static</li>
+        </ul>
+      </li>
       <li>1.0.2
         <ul>
             <li>Times are sanitized for valid input, negative times are prevented</li>
