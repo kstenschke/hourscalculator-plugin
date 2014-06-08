@@ -34,7 +34,6 @@ public class HoursCalculatorPopup {
 
     public JMenuItem menuItemHourToCurrentTime;
     public JMenuItem menuItemResetHour;
-    public JMenuItem menuItemResetAllHours;
     public JMenuItem menuItemShowSumMinutes;
     public JMenuItem menuItemShowSumFraction;
     public JMenuItem menuItemShowSumDuration;
@@ -74,26 +73,14 @@ public class HoursCalculatorPopup {
                 setFieldText(textField, "0:00");
             }
         });
-        this.popup.add(this.menuItemResetHour);
-
-        this.popup.addSeparator();
-
-            // Reset all fields to 0:00
-        this.menuItemResetAllHours = new JMenuItem(StaticTexts.POPUP_RESET_ALL_HOURS);
-        this.menuItemResetAllHours.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dialog.resetAllHours();
-            }
-        });
         try {
-            Image imageReset = ImageIO.read( getClass().getResource("resources/images/arrow-reset.png") );
+            Image imageReset = ImageIO.read( getClass().getResource("resources/images/set-zero.png") );
             ImageIcon iconReset   = new ImageIcon(imageReset);
-            this.menuItemResetAllHours.setIcon(iconReset);
+            this.menuItemResetHour.setIcon(iconReset);
         } catch(Exception exception) {
             exception.printStackTrace();
         }
-        this.popup.add(this.menuItemResetAllHours);
+        this.popup.add(this.menuItemResetHour);
 
         this.popup.addSeparator();
 

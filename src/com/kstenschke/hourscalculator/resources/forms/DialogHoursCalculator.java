@@ -17,6 +17,7 @@ package com.kstenschke.hourscalculator.resources.forms;
 
 import com.kstenschke.hourscalculator.HoursCalculator;
 import com.kstenschke.hourscalculator.HoursCalculatorPopup;
+import com.kstenschke.hourscalculator.utils.UtilsEnvironment;
 import com.kstenschke.hourscalculator.utils.UtilsPreferences;
 import com.kstenschke.hourscalculator.utils.UtilsString;
 
@@ -60,6 +61,10 @@ public class DialogHoursCalculator extends JDialog {
     public JLabel eq4;
     public JLabel eq5;
 
+    public JButton startDayButton;
+    public JButton noteTimeButton;
+    private JButton buttonRefresh;
+
     /**
      * Constructor
      */
@@ -68,6 +73,7 @@ public class DialogHoursCalculator extends JDialog {
 
         setResizable(false);
         setAlwaysOnTop(true);
+        initToolbar();
         addPopupMenus();
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -100,6 +106,57 @@ public class DialogHoursCalculator extends JDialog {
     private void onClose() {
         storeTimesPref();
         dispose();
+    }
+
+    private void initToolbar() {
+        startDayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetAllHours();
+                textFieldStart1.setText( UtilsEnvironment.getCurrentTime() );
+            }
+        });
+
+        noteTimeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField slot = findFirstEmptySlot();
+                if(slot != null ) {
+                    slot.setText( UtilsEnvironment.getCurrentTime() );
+
+                }
+            }
+        });
+
+        buttonRefresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateHourSums();
+            }
+        });
+    }
+
+    private JTextField findFirstEmptySlot() {
+        if(containsZero(textFieldStart1)) return textFieldStart1;
+        if(containsZero(textFieldEnd1)) return textFieldEnd1;
+
+        if(containsZero(textFieldStart2)) return textFieldStart2;
+        if(containsZero(textFieldEnd2)) return textFieldEnd2;
+
+        if(containsZero(textFieldStart3)) return textFieldStart3;
+        if(containsZero(textFieldEnd3)) return textFieldEnd3;
+
+        if(containsZero(textFieldStart4)) return textFieldStart4;
+        if(containsZero(textFieldEnd4)) return textFieldEnd4;
+
+        if(containsZero(textFieldStart5)) return textFieldStart5;
+        if(containsZero(textFieldEnd5)) return textFieldEnd5;
+
+        return null;
+    }
+
+    private Boolean containsZero(JTextField jTextField) {
+        return jTextField.getText().equals("0:00");
     }
 
     public void initTimesFromPrefs() {

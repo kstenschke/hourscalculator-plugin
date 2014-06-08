@@ -16,7 +16,6 @@
 <idea-plugin version="2">
   <name>Hours Calculator</name>
   <id>com.kstenschke.hourscalculator</id>
-  <version>1.0.3</version>
   <vendor email="info@stenschke.com">Kay Stenschke</vendor>
 
   <description><![CDATA[
@@ -28,8 +27,18 @@
   which is licensed under the Attribution 3.0 Unported license (http://creativecommons.org/licenses/by/3.0/)
   ]]></description>
 
+  <version>1.0.4</version>
   <change-notes><![CDATA[
   <ul>
+      <li>1.0.4
+        <ul>
+            <li>Added: toolbar</li>
+            <li>Added: option "start day" - resets all times, sets 1st field to current time</li>
+            <li>Added: option "note time" - stores current time into 1st empty slot</li>
+            <li>Removed: context menu option "reset all"</li>
+            <li>Added shortcut icon to IDE main toolbar</li>
+        </ul>
+      </li>
       <li>1.0.3 Duration minutes are now formatted with two digits, UI improvements</li>
       <li>1.0.2
         <ul>
@@ -64,7 +73,13 @@
   </project-components>
 
   <actions>
-    <!-- Add your actions here -->
+      <group id="hourscalculatormainshortcut">
+          <action id="hourscalculatorinmainmenu" class="com.kstenschke.hourscalculator.HoursCalculatorAction" text="Open Hours Calculator" description="Open Hours Calculator" icon="resources/images/clock.png">
+          </action>
+          <separator/>
+          <add-to-group group-id="MainToolBar" anchor="last"/>
+      </group>
+
       <action id="hourscalculator" class="com.kstenschke.hourscalculator.HoursCalculatorAction" text="Hours Calculator"
               description="Hours Calculator" icon="resources/images/clock.png">
           <add-to-group group-id="ToolsMenu" anchor="last"/>
