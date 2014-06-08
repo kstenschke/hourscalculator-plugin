@@ -25,8 +25,7 @@ http://plugins.jetbrains.com/plugin/7455
 
 Credits
 -------
-The icons used in this plugin are from the Iconsweets iconset - http://iconsweets.com/
-which is licensed under the Attribution 3.0 Unported license - http://creativecommons.org/licenses/by/3.0/)
+The icons used in this plugin are from the "LED iconset":http://led24.de/iconset/
 
 
 License
