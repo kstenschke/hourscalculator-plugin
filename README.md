@@ -6,21 +6,11 @@ This is a plugin for the various intellij IDEs, working in
 Intellij IDEA, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode and Android Studio.
 
 
-Screenshot
-----------
-![Hours Calculator Plugin](https://github.com/kstenschke/hourscalculator-plugin/blob/master/screenshot.png?raw=true)
-
-
 Description
 -----------
 A simple tool to quickly note and calculate the sum of hour durations from given times of a day.
 
 Usage: The Hours Calculator is added to the "Tools" menu of the IDE.
-
-
-Jetbrains Plugin Repository URL
--------------------------------
-http://plugins.jetbrains.com/plugin/7455
 
 
 Credits
